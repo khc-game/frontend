@@ -1,51 +1,27 @@
 // libs
-import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 
-// config
-import Socket from './config/socket';
+// pages
+import HomePage from "./pages/HomePage";
+import GamePage from "./pages/GamePage";
+import NotFoundPage from "./pages/NotFoundPage";
 
-// components
-import EnterGame from "./components/EnterGame/EnterGame";
-
-// slices
-import { setUserId } from './store/slices/user.slice.js'
-
+// constants
+import ROUTES from "./constants/routes.js";
 
 // styles
-import './app.css';
+import "./app.css";
 
 function App() {
-	const [isSocketConnected, setIsSocketConnected] = useState(-1);
-
-	const dispatch = useDispatch();
-
-	const onEnterGame = () => {
-		setIsSocketConnected(0);
-
-		Socket.connect(
-			() => { setIsSocketConnected(1); },
-			() => { setIsSocketConnected(2); }
-		);
-
-		Socket.on("getUserId", (data) => {
-			dispatch(setUserId(data));
-		});
-	}
-
-	return (
-		<div>
-			{
-				isSocketConnected === -1 ?
-				<div>
-					<button onClick={onEnterGame}>Enter game</button>
-				</div> :
-				isSocketConnected === 0 ? <p>Connecting to server..</p> :
-				isSocketConnected === 1 ? <EnterGame /> :
-				isSocketConnected === 2 && <p>Connection failed</p>
-			}
-		</div>
-	);
+  return (
+    <div>
+      <Routes>
+        <Route path={ROUTES.HOME} element={<HomePage />} />
+        <Route path={ROUTES.GAME} element={<GamePage />} />
+        <Route path={ROUTES.NOT_FOUND} element={<NotFoundPage />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;

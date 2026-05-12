@@ -1,11 +1,16 @@
+// libs
 import { io } from "socket.io-client";
 
 class Socket {
   static socket = null;
 
-  static connect(onConnect = () => { }, onError = () => { }) {
-    if (Socket.socket !== null) { return }
-    Socket.socket = io("http://192.168.0.104:5000");
+  static connect(onConnect = () => {}, onError = () => {}) {
+    if (Socket.socket !== null) {
+      console.warn("Socket is already connected");
+      return;
+    }
+    
+    Socket.socket = io("http://localhost:5000");
 
     Socket.socket.on("connect_error", (error) => {
       console.error("Connection failed:", error.message);
@@ -19,7 +24,8 @@ class Socket {
   }
 
   static disconnect() {
-    if (Socket.socket === null) { return }
+    if (Socket.socket === null) return;
+
     Socket.socket.removeAllListeners();
     Socket.socket.disconnect();
     Socket.socket = null;
@@ -27,25 +33,28 @@ class Socket {
 
   static on(event, listener) {
     if (Socket.socket === null) {
-      console.warn("[1] Cant add event", event);
-      return
+      console.warn("Socket is not connected", event);
+      return;
     }
+
     Socket.socket.on(event, listener);
   }
 
   static emit(event, message) {
     if (Socket.socket === null) {
-      console.warn("[2] Cant emit", event, message);
-      return
+      console.warn("Socket is not connected", event, message);
+      return;
     }
+
     Socket.socket.emit(event, message);
   }
 
   static to(userId, data) {
     if (Socket.socket === null) {
-      console.warn("[3] Cant emit", userId, data);
-      return
+      console.warn("Socket is not connected", userId, data);
+      return;
     }
+
     io.to(userId).emit(data);
   }
 }

@@ -38,42 +38,11 @@ export default function Gameplay() {
       setGameEndMsg("Disconnect from server");
       setGameplayStatus("gameEndResult");
     });
-
-    Socket.on("showPersons", (data) => {
-      setPersons(JSON.parse(data));
-      setIsShowPersons(true);
-    });
-
-    Socket.on("gameFoundAndStart", (dataJSON) => {
-      const data = JSON.parse(dataJSON);
-      dispatch(setBoard(data.board));
-      dispatch(setRoomId(data.id));
-      dispatch(setTurn(data.turn));
-      dispatch(setOpponentId(data.opponentId));
-      setGameplayStatus("game started");
-    });
-
-    Socket.on("gameEndResult", (data) => {
-      setGameEndMsg(data);
-      setGameplayStatus("gameEndResult");
-    });
-
-    Socket.on("canceledPlay", () => {
-      setGameplayStatus("cenceled");
-    });
-
-    Socket.on("setBoard", (data) => {
-      dispatch(setBoard(JSON.parse(data)));
-    });
-
-    Socket.on("turnChange", (data) => {
-      dispatch(setTurn(data));
-    });
   }, []);
 
   // handlers
   const onSelectPerson = () => {
-    Socket.emit("play");
+    
   }
 
   const closePersonsMenu = () => {

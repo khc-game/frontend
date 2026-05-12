@@ -1,30 +1,6 @@
 // libs
 import { createSlice } from "@reduxjs/toolkit";
 
-const boardInit = () => {
-  const board = [];
-
-  for (let i = 0; i < 8; ++i) {
-    const line = [];
-    for (let j = 0; j < 8; ++j) {
-      line.push(null);
-    }
-    board.push(line);
-  }
-
-  return board;
-}
-
-const initState = () => {
-  return {
-    board: boardInit,
-    opponentId: null,
-    isGameOver: false,
-    turn: null,
-    roomId: null,
-  }
-}
-
 const gameSlice = createSlice({
   name: "gameSlice",
 
@@ -59,10 +35,9 @@ const gameSlice = createSlice({
       state.isGameOver = initStates.isGameOver;
       state.turn = initStates.turn;
       state.roomId = initStates.roomId;
-    }
+    },
   },
 });
-
 
 export default gameSlice.reducer;
 export const {
@@ -73,3 +48,27 @@ export const {
   setRoomId,
   resetAll,
 } = gameSlice.actions;
+
+function boardInit() {
+  const board = [];
+
+  for (let i = 0; i < 8; ++i) {
+    const line = [];
+    for (let j = 0; j < 8; ++j) {
+      line.push(null);
+    }
+    board.push(line);
+  }
+
+  return board;
+}
+
+function initState() {
+  return {
+    board: boardInit,
+    opponentId: null,
+    isGameOver: false,
+    turn: null,
+    roomId: null,
+  };
+}
