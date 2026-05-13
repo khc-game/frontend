@@ -4,8 +4,8 @@ import { useState } from "react";
 // components
 import ConnectingView from "../../components/ConnectingView";
 import LobbyView from "../../components/LobbyView";
-import MatchmakingView from '../../components/MatchmakingView';
-import GameView from '../../components/GameView';
+import MatchmakingView from "../../components/MatchmakingView";
+import GameView from "../../components/GameView";
 
 // hooks
 import useSocket from "../../hooks/useSocket";
