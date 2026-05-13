@@ -4,8 +4,8 @@ import { useState } from "react";
 // components
 import EnterGame from "../../components/EnterGame";
 
-// config
-import Socket from "../../config/socket";
+// hooks
+import useSocket from '../../hooks/useSocket';
 
 // styles
 import classes from "./styles.module.css";
@@ -22,6 +22,9 @@ export default function GamePage() {
     connectionStates.notConnected,
   );
 
+  const { socket } = useSocket();
+  console.log(socket);
+
   const isConnected = connectStatus === connectionStates.connected;
   const isNotConnected = connectStatus === connectionStates.notConnected;
   const isHasError = connectStatus === connectionStates.hasError;
@@ -32,15 +35,13 @@ export default function GamePage() {
 
     setConnectStatus(connectionStates.inPending);
 
-    Socket.connect(
-      () => {
-        setConnectStatus(connectionStates.connected);
-      },
-      (err) => {
-        setConnectStatus(connectionStates.hasError);
-        console.error("Cant connect:", err);
-      },
-    );
+    // () => {
+    //   setConnectStatus(connectionStates.connected);
+    // },
+    // (err) => {
+    //   setConnectStatus(connectionStates.hasError);
+    //   console.error("Cant connect:", err);
+    // }
   };
 
   return (

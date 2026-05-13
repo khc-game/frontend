@@ -15,7 +15,7 @@ import {
 } from '../../store/slices/game.slice.js'
 
 // config
-import Socket from '../../config/socket';
+// import Socket from '../../config/socket';
 
 // styles
 import classes from './styles.module.css';
@@ -30,14 +30,14 @@ export default function Gameplay() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    Socket.on("message", (data) => {
-      console.log(data);
-    });
+    // Socket.on("message", (data) => {
+    //   console.log(data);
+    // });
 
-    Socket.on("disconnect", () => {
-      setGameEndMsg("Disconnect from server");
-      setGameplayStatus("gameEndResult");
-    });
+    // Socket.on("disconnect", () => {
+    //   setGameEndMsg("Disconnect from server");
+    //   setGameplayStatus("gameEndResult");
+    // });
   }, []);
 
   // handlers
@@ -51,7 +51,7 @@ export default function Gameplay() {
   }
 
   const onCancel = () => {
-    Socket.emit("cancelPlay");
+    // Socket.emit("cancelPlay");
   }
 
   return (

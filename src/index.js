@@ -7,13 +7,13 @@ import { Provider } from "react-redux";
 import App from "./App";
 
 // store
-import store from './store/store.js'
+import store from "./store/store.js";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Provider store={store}>
-    <BrowserRouter>
+  <BrowserRouter>
+    <Provider store={store}>
       <App />
-    </BrowserRouter>
-  </Provider>
+    </Provider>
+  </BrowserRouter>,
 );

@@ -1,6 +1,3 @@
-// config
-import Socket from '../../config/socket';
-
 // styles
 import classes from './styles.module.css';
 
@@ -21,7 +18,7 @@ export default function SelectPersons({ closePersonsMenu, persons, selectedPerso
   }
 
   const onPlay = () => {
-    Socket.emit("play", JSON.stringify(selectedPersons));
+    // Socket.emit("play", JSON.stringify(selectedPersons));
     closePersonsMenu();
   }
 

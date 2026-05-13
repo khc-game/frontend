@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import Cell from '../Cell/Cell';
 
 // config
-import Socket from '../../config/socket';
+// import Socket from '../../config/socket';
 
 // styles
 import classes from './styles.module.css';
@@ -27,7 +27,7 @@ export default function Board({ isReverseBoard }) {
   }, []);
 
   const onResign = () => {
-    Socket.emit("resign");
+    // Socket.emit("resign");
   }
 
   const onCellClick = (i, j) => {
@@ -42,7 +42,7 @@ export default function Board({ isReverseBoard }) {
         from: { i, j },
         to: { i: 10, j: 10 }
       };
-      Socket.emit("useModule", JSON.stringify(usingData));
+      // Socket.emit("useModule", JSON.stringify(usingData));
     } else if (board[i][j].person !== null) {
       console.log(board[i][j].person?.playerId, userId);
       
@@ -50,7 +50,7 @@ export default function Board({ isReverseBoard }) {
         const usingData = {
           from: { i, j }
         };
-        Socket.emit("selectPerson", JSON.stringify(usingData));
+        // Socket.emit("selectPerson", JSON.stringify(usingData));
       } else {
         console.warn("Person's owner is not you");
       }
