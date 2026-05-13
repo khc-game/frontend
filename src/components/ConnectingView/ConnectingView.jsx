@@ -20,9 +20,7 @@ export default function ConnectingView({ setGameState }) {
   const isHasError = connectStatus === CONNECTION_STATES.ERROR;
 
   const changeStateToLobby = () => {
-    setTimeout(() => {
-      setGameState(GAME_STATES.LOBBY);
-    }, 1000);
+    setGameState(GAME_STATES.LOBBY);
   };
 
   useEffect(() => {
