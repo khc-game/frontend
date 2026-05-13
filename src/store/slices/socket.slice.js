@@ -18,12 +18,18 @@ const socketSlice = createSlice({
         return;
       }
 
-      state.socket = io("http://localhost:5000");
+      state.socket = io("http://localhost:5000", {
+        reconnection: false,
+      });
 
       state.socket.on("connect_error", (error) => {
-        console.error("Connection failed:", error.message);
-        state.disconnect();
-        onError();
+        console.warn("Connection error:", error.message);
+
+        state.socket?.removeAllListeners();
+        state.socket?.close(); 
+        state.socket = null;
+
+        onError(error.message);
       });
 
       state.socket.on("connect", () => {
@@ -34,8 +40,8 @@ const socketSlice = createSlice({
     disconnect(state) {
       if (state.socket === null) return;
 
-      state.socket.removeAllListeners();
-      state.socket.disconnect();
+      state.socket?.removeAllListeners();
+      state.socket?.close();
       state.socket = null;
     },
 

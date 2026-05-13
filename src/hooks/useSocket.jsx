@@ -14,25 +14,34 @@ export default function useSocket() {
   const [socketData, dispatch] = useRedux("socketSlice");
   const socket = socketData.socket;
 
-  const doConnect = (onConnect, onError) => {
+  const isSocketConnected = socket?.connected ?? false;
+
+  const socketConnect = (onConnect, onError) => {
     dispatch(connect({ onConnect, onError }));
   };
 
-  const doDisconnect = () => {
+  const socketDisconnect = () => {
     dispatch(disconnect());
   };
 
-  const doOn = (event, listener) => {
+  const socketOn = (event, listener) => {
     dispatch(on({ event, listener }));
   };
-  
-  const doEmit = (event, message) => {
+
+  const socketEmit = (event, message) => {
     dispatch(emit({ event, message }));
   };
-  
-  const doTo = (userId, data) => {
+
+  const socketTo = (userId, data) => {
     dispatch(to({ userId, data }));
   };
 
-  return { socket, doConnect, doDisconnect, doOn, doEmit, doTo };
+  return {
+    isSocketConnected,
+    socketConnect,
+    socketDisconnect,
+    socketOn,
+    socketEmit,
+    socketTo,
+  };
 }
