@@ -7,68 +7,37 @@ const gameSlice = createSlice({
   initialState: initState(),
 
   reducers: {
-    setBoard(state, { payload }) {
-      state.board = payload;
+    initGame(state, { payload }) {
+      state.map = payload.map;
+      state.turn = payload.turn;
+      state.players = payload.players;
     },
 
-    setTurn(state, { payload }) {
+    changeTurn(state, { payload }) {
       state.turn = payload;
-    },
-
-    setIsGameOver(state, { payload }) {
-      state.isGameOver = payload;
-    },
-
-    setOpponentId(state, { payload }) {
-      state.opponentId = payload;
-    },
-
-    setRoomId(state, { payload }) {
-      state.roomId = payload;
     },
 
     resetAll(state) {
       const initStates = initState();
 
-      state.board = initStates.board;
-      state.opponentId = initState.opponentId;
-      state.isGameOver = initStates.isGameOver;
+      state.map = initStates.map;
       state.turn = initStates.turn;
-      state.roomId = initStates.roomId;
+      state.players = initStates.players;
     },
   },
 });
 
 export default gameSlice.reducer;
 export const {
-  setBoard,
-  setTurn,
-  setIsGameOver,
-  setOpponentId,
-  setRoomId,
+  initGame,
+  changeTurn,
   resetAll,
 } = gameSlice.actions;
 
-function boardInit() {
-  const board = [];
-
-  for (let i = 0; i < 8; ++i) {
-    const line = [];
-    for (let j = 0; j < 8; ++j) {
-      line.push(null);
-    }
-    board.push(line);
-  }
-
-  return board;
-}
-
 function initState() {
   return {
-    board: boardInit,
-    opponentId: null,
-    isGameOver: false,
+    map: null,
     turn: null,
-    roomId: null,
+    players: null,
   };
 }

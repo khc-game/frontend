@@ -5,6 +5,7 @@ import {
   emit,
   on,
   to,
+  off,
 } from "../store/slices/socket.slice.js";
 
 // hooks
@@ -36,12 +37,18 @@ export default function useSocket() {
     dispatch(to({ userId, data }));
   };
 
+  const socketOff = (event) => {
+    dispatch(off(event));
+  };
+
   return {
     isSocketConnected,
+    id: socket?.id ?? null,
     socketConnect,
     socketDisconnect,
     socketOn,
     socketEmit,
     socketTo,
+    socketOff,
   };
 }

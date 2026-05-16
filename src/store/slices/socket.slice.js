@@ -26,7 +26,7 @@ const socketSlice = createSlice({
         console.warn("Connection error:", error.message);
 
         state.socket?.removeAllListeners();
-        state.socket?.close(); 
+        state.socket?.close();
         state.socket = null;
 
         onError(error.message);
@@ -77,8 +77,17 @@ const socketSlice = createSlice({
 
       io.to(userId).emit(data);
     },
+
+    off(state, { payload }) {
+      if (state.socket === null) {
+        console.warn("Socket is not connected");
+        return;
+      }
+
+      state.socket.off(payload);
+    },
   },
 });
 
 export default socketSlice.reducer;
-export const { connect, disconnect, emit, on, to } = socketSlice.actions;
+export const { connect, disconnect, emit, on, to, off } = socketSlice.actions;

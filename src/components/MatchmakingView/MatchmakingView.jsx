@@ -1,12 +1,24 @@
+// hooks
+import useSocket from '../../hooks/useSocket';
+
+// constants
+import GAME_STATES from '../../constants/gameStates';
+
 // styles
 import classes from './styles.module.css';
 
-export default function MatchmakingView() {
-  // TODO
+export default function MatchmakingView({ setGameState }) {
+  const { socketEmit } = useSocket();
+
+  const onCancel = () => {
+    socketEmit("cancel");
+    setGameState(GAME_STATES.LOBBY);
+  };
+
   return (
     <div className={classes.root}>
-      (MathcmakingView)
-      <p>(show message about finding the session)</p>
+      <p>Finding opponent..</p>
+      <button onClick={onCancel}>cancel</button>
     </div>
   )
 }

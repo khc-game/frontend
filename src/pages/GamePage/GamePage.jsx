@@ -1,5 +1,6 @@
 // libs
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 // components
 import ConnectingView from "../../components/ConnectingView";
@@ -10,6 +11,9 @@ import GameView from "../../components/GameView";
 // hooks
 import useSocket from "../../hooks/useSocket";
 
+// slices action
+import { initGame } from "../../store/slices/game.slice.js";
+
 // constants
 import GAME_STATES from "../../constants/gameStates";
 
@@ -17,10 +21,28 @@ import GAME_STATES from "../../constants/gameStates";
 import classes from "./styles.module.css";
 
 export default function GamePage() {
-  const { isSocketConnected } = useSocket();
+  const { isSocketConnected, socketOn, socketOff } = useSocket();
   const [gameState, setGameState] = useState(
     isSocketConnected ? GAME_STATES.LOBBY : GAME_STATES.CONNECTING,
   );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    socketOn("disconnect", () => {
+      setGameState(GAME_STATES.LOBBY);
+    });
+
+    socketOn("play", (data) => {
+      dispatch(initGame(data));
+      setGameState(GAME_STATES.GAME);
+    });
+
+    return () => {
+      socketOff("play");
+      socketOff("disconnect");
+    };
+  }, []);
 
   const isConnectingState = gameState === GAME_STATES.CONNECTING;
   const isLobbyState = gameState === GAME_STATES.LOBBY;

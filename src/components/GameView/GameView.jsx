@@ -1,12 +1,13 @@
+// components
+import Board from '../Board';
+
 // styles
 import classes from './styles.module.css';
 
-export default function GameView() {
-  // TODO
+export default function GameView({ setGameState }) {
   return (
     <div className={classes.root}>
-      (GameView)
-      <p>(playing session)</p>
+      <Board />
     </div>
   )
 }

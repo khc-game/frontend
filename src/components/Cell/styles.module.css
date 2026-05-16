@@ -4,3 +4,7 @@
   height: var(--size);
   background-color: white;
 }
+
+.rotate {
+  transform: rotate(180deg);
+}
