@@ -12,8 +12,10 @@ import useSocket from '../../hooks/useSocket';
 import classes from './styles.module.css';
 
 export default function Board() {
-  const [showedModules, setShowedModules] = useState([]);
-  const { id: userId, socketOn, socketOff, socketEmit } = useSocket();
+  const [selectedCharacter, setSelectedCharacter] = useState(null);
+  const [selectedModuleInd, setSelectedModuleInd] = useState(null);
+  const [whereCanUse, setWhereCanUse] = useState(null);
+  const { id: userId, socketEmit, socketOn, socketOff } = useSocket();
   const [gameData] = useRedux("gameSlice");
   const { map, turn, players } = gameData;
   const opponentId = players[0] === userId ? players[1] : players[0];
@@ -21,26 +23,52 @@ export default function Board() {
 
   useEffect(() => {
     socketOn("message", (msg) => console.log(msg));
-    // TODO - add socket event listneres such as showModules, etc.
+    socketOn("module:canUseAt", (data) => setWhereCanUse(data));
+    // TODO: handled response after use
 
     return () => {
       socketOff("message");
+      socketOff("module:canUseAt");
     };
   }, []);
 
-  const onResign = () => {
-    socketEmit("resign");
-  }
+  const onCellClick = (i, j, isCanUseHere = false) => {
+    // use module
+    if (isCanUseHere) {
+      socketEmit("module:use", {
+        ind: selectedModuleInd,
+        fromI: selectedCharacter.i,
+        fromJ: selectedCharacter.j,
+        toI: i,
+        toJ: j,
+      });
 
-  const onCellClick = (i, j) => {
-    // is available use cell - useModule
-    // check persons's owner - if is player then call selectPerson
-    // selected cell is empty - clear selected modules and person
+      setSelectedCharacter(null);
+      setSelectedModuleInd(null);
+      setWhereCanUse(null);
+      return;
+    }
+
+    if (turn !== userId) return;
+    const character = map[i][j].content;
+
+    if (character?.playerId !== userId) return setSelectedCharacter(null);
+  
+    setSelectedCharacter({ character, i, j });
+  };
+
+  const onModuleClick = (moduleInd) => {
+    setSelectedModuleInd(moduleInd);
+    socketEmit("module:select", { 
+      i: selectedCharacter.i, 
+      j: selectedCharacter.j, 
+      ind: moduleInd 
+    });
   };
 
   return (
     <>
-      <p>{opponentId}</p>
+      <p>{opponentId} {turn === opponentId && "(turn)"}</p>
       <div className={`${classes.root} ${isRotateMap && classes.rotate}`}>
         {map.map((line, i) =>
           line.map((cellData, j) =>
@@ -51,16 +79,15 @@ export default function Board() {
               j={j}
               onCellClick={onCellClick}
               isRotateMap={isRotateMap}
+              whereCanUse={whereCanUse}
             />
           )
         )}
       </div>
-      <p>{userId}</p>
-      <p>Turn: {turn}</p>
-      <button onClick={onResign}>resign</button>
+      <p>{userId} {turn === userId && "(turn)"}</p>
       {
-        showedModules.map((module, ind) =>
-          <button key={ind}>
+        selectedCharacter?.character?.modules.map((module, ind) =>
+          <button key={ind} onClick={() => onModuleClick(ind)}>
             {module?.title}
           </button>
         )

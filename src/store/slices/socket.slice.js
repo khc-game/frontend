@@ -19,7 +19,7 @@ const socketSlice = createSlice({
       }
 
       state.socket = io("http://localhost:5000", {
-        reconnection: false,
+        // reconnection: false,
       });
 
       state.socket.on("connect_error", (error) => {
