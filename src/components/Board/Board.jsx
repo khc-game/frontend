@@ -9,7 +9,7 @@ import useRedux from '../../hooks/useRedux';
 import useSocket from '../../hooks/useSocket';
 
 // actions
-import { applyMapChanges } from '../../store/slices/game.slice.js'
+import { applyMapChanges, changeTurn } from '../../store/slices/game.slice.js'
 
 // styles
 import classes from './styles.module.css';
@@ -28,7 +28,9 @@ export default function Board() {
     socketOn("message", (msg) => console.log(msg));
     socketOn("module:canUseAt", (data) => setWhereCanUse(data));
     socketOn("module:mapUpdate", (data) => {
-      dispatch(applyMapChanges(data))
+      const [updates, newTurn] = data;
+      dispatch(applyMapChanges(updates));
+      dispatch(changeTurn(newTurn));
       setSelectedCharacter(null);
       setSelectedModuleInd(null);
       setWhereCanUse(null);

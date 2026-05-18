@@ -21,7 +21,8 @@ export default function Cell({ data, i, j, onCellClick, isRotateMap, whereCanUse
   return (
     <div className={`${classes.root} ${ isRotateMap && classes.rotate}`} onClick={onClick} >
       {data?.content && <p>{data?.content?.name}</p>}
-      {isCanUseHere && "#-#"}
+      {isCanUseHere && "#"}
+      {data?.content?.hp}
     </div>
   )
 }
