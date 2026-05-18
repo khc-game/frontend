@@ -15,8 +15,7 @@ const gameSlice = createSlice({
 
     applyMapChanges(state, { payload }) {
       for (let i = 0; i < payload.length; ++i) {
-        const [pos, cellData] = payload[i];
-        const [posI, posJ] = pos;
+        const [posI, posJ, cellData] = payload[i];
         state.map[posI][posJ] = cellData;
       }
     },
