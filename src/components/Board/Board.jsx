@@ -8,6 +8,9 @@ import Cell from '../Cell/Cell';
 import useRedux from '../../hooks/useRedux';
 import useSocket from '../../hooks/useSocket';
 
+// actions
+import { applyMapChanges } from '../../store/slices/game.slice.js'
+
 // styles
 import classes from './styles.module.css';
 
@@ -16,7 +19,7 @@ export default function Board() {
   const [selectedModuleInd, setSelectedModuleInd] = useState(null);
   const [whereCanUse, setWhereCanUse] = useState(null);
   const { id: userId, socketEmit, socketOn, socketOff } = useSocket();
-  const [gameData] = useRedux("gameSlice");
+  const [gameData, dispatch] = useRedux("gameSlice");
   const { map, turn, players } = gameData;
   const opponentId = players[0] === userId ? players[1] : players[0];
   const isRotateMap = players[0] === userId;
@@ -24,11 +27,17 @@ export default function Board() {
   useEffect(() => {
     socketOn("message", (msg) => console.log(msg));
     socketOn("module:canUseAt", (data) => setWhereCanUse(data));
-    // TODO: handled response after use
+    socketOn("module:mapUpdate", (data) => {
+      dispatch(applyMapChanges(data))
+      setSelectedCharacter(null);
+      setSelectedModuleInd(null);
+      setWhereCanUse(null);
+    });
 
     return () => {
       socketOff("message");
       socketOff("module:canUseAt");
+      socketOff("module:mapUpdate");
     };
   }, []);
 
@@ -43,11 +52,10 @@ export default function Board() {
         toJ: j,
       });
 
-      setSelectedCharacter(null);
-      setSelectedModuleInd(null);
-      setWhereCanUse(null);
       return;
     }
+    
+    setWhereCanUse(null);
 
     if (turn !== userId) return;
     const character = map[i][j].content;

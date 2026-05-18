@@ -13,6 +13,14 @@ const gameSlice = createSlice({
       state.players = payload.players;
     },
 
+    applyMapChanges(state, { payload }) {
+      for (let i = 0; i < payload.length; ++i) {
+        const [pos, cellData] = payload[i];
+        const [posI, posJ] = pos;
+        state.map[posI][posJ] = cellData;
+      }
+    },
+
     changeTurn(state, { payload }) {
       state.turn = payload;
     },
@@ -30,6 +38,7 @@ const gameSlice = createSlice({
 export default gameSlice.reducer;
 export const {
   initGame,
+  applyMapChanges,
   changeTurn,
   resetAll,
 } = gameSlice.actions;
