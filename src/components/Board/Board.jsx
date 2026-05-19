@@ -68,6 +68,7 @@ export default function Board() {
   };
 
   const onModuleClick = (moduleInd) => {
+    setWhereCanUse(null);
     setSelectedModuleInd(moduleInd);
     socketEmit("module:select", { 
       i: selectedCharacter.i, 
