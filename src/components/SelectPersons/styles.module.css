@@ -2,17 +2,34 @@
   
 }
 
+.characters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.emptyCharacterMsg {
+  height: 112px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+  border-radius: 5px;
+  color: #5f5f5f;
+  border: 1px solid #b4b4b4;
+  background-color: #d4d4d4;
+}
+
 .characterButton {
-  aspect-ratio: 16/9;
-  height: 100px;
+  width: fit-content;
   padding: 5px;
+  aspect-ratio: 1/1;
   overflow: hidden;
-  border-color: gray;
+  border-color: #808080;
 }
 
 .characterImg {
-  translate: 0 70%;
   margin: auto;
   width: 100px;
-  scale: 2.3;
+  border-radius: 5px;
 }

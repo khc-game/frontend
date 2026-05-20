@@ -1,3 +1,3 @@
-const SERVER = "http://localhost:5000"
+const SERVER = "http://192.168.101.5:5000"
 
 export default SERVER;

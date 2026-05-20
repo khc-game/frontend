@@ -56,20 +56,22 @@ export default function SelectPersons({ onPlay }) {
 
       <div>
         <h3>Selected characters</h3>
-        <div>
-          {selectedCharacters.map((char, ind) => (
-            <Character 
-              key={`${ind} ${char.key}`} 
-              data={char}
-              onSelectChar={() => deselectChar(ind)} 
-            />
-          ))}
+        <div className={classes.characters}>
+          {selectedCharacters.length === 0 ? 
+            <p className={classes.emptyCharacterMsg}>Select characters</p>:
+            selectedCharacters.map((char, ind) => (
+              <Character 
+                key={`${ind} ${char.key}`} 
+                data={char}
+                onSelectChar={() => deselectChar(ind)} 
+              />
+            ))}
         </div>
       </div>
 
       <div>
         <h3>All characters</h3>
-        <div>
+        <div className={classes.characters}>
           {allCharacters.map((char, ind) => (
             <Character 
               key={`${ind} ${char.key}`} 
