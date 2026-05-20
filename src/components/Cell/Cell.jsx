@@ -1,7 +1,15 @@
+// components
+import CharacterImg from '../CharacterImg';
+
+// hooks
+import useSocket from '../../hooks/useSocket';
+
 // styles
 import classes from './styles.module.css';
 
 export default function Cell({ data, i, j, onCellClick, isRotateMap, whereCanUse }) {
+  const { id: userId } = useSocket();
+
 
   let isCanUseHere = false;
 
@@ -18,11 +26,25 @@ export default function Cell({ data, i, j, onCellClick, isRotateMap, whereCanUse
     onCellClick(i, j, isCanUseHere);
   }
 
+  const isPlayerCharacter = userId === data?.content?.playerId;
+
   return (
-    <div className={`${classes.root} ${ isRotateMap && classes.rotate}`} onClick={onClick} >
-      {data?.content && <p>{data?.content?.name}</p>}
-      {isCanUseHere && "#"}
-      {data?.content?.hp}
+    <div 
+      className={`
+        ${classes.root} 
+        ${isRotateMap && classes.rotate}
+        ${data?.content && (isPlayerCharacter ? classes.myChar : classes.enemyChar)}
+        ${isCanUseHere && classes.canUse }
+      `} 
+      onClick={onClick} 
+    >
+      {
+        data?.content &&
+        <>
+          <p>{data?.content?.hp}</p>
+          <CharacterImg characterName={data.content.key} className={classes.person}/>
+        </>
+      }
     </div>
   )
 }

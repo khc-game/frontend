@@ -1,6 +1,9 @@
 // libs
 import { useEffect, useState } from "react";
 
+// components
+import CharacterImg from '../CharacterImg';
+
 // hooks
 import useSocket from "../../hooks/useSocket";
 import useApiResolver from '../../hooks/useApiResolver';
@@ -55,7 +58,11 @@ export default function SelectPersons({ onPlay }) {
         <h3>Selected characters</h3>
         <div>
           {selectedCharacters.map((char, ind) => (
-            <button key={`${ind} ${char.key}`} onClick={() => deselectChar(ind)}>{char.name}</button>
+            <Character 
+              key={`${ind} ${char.key}`} 
+              data={char}
+              onSelectChar={() => deselectChar(ind)} 
+            />
           ))}
         </div>
       </div>
@@ -64,12 +71,24 @@ export default function SelectPersons({ onPlay }) {
         <h3>All characters</h3>
         <div>
           {allCharacters.map((char, ind) => (
-            <button key={`${ind} ${char.key}`} onClick={() => selectChar(ind)}>{char.name}</button>
+            <Character 
+              key={`${ind} ${char.key}`} 
+              data={char}
+              onSelectChar={() => selectChar(ind)} 
+            />
           ))}
         </div>
       </div>
 
       <button onClick={onPlayHandle}>play</button>
     </div>
+  );
+}
+
+function Character({ data, onSelectChar }) {
+  return (
+    <button onClick={onSelectChar} className={classes.characterButton}>
+      <CharacterImg characterName={data.key} className={classes.characterImg}/>
+    </button>
   );
 }

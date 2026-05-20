@@ -2,9 +2,43 @@
   --size: 80px;
   width: var(--size);
   height: var(--size);
+  display: grid;
+  grid-template-rows: 20% 80%;
   background-color: white;
 }
 
 .rotate {
   transform: rotate(180deg);
+}
+
+.person {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+
+
+.enemyChar,
+.canUse,
+.myChar {
+  --shadowWidth: 2px;
+  --shadowWidthNegative: calc(-1 * var(--shadowWidth));
+  --color: gray;
+
+  box-shadow: 
+    inset var(--shadowWidth) var(--shadowWidth) 0px var(--color),
+    inset var(--shadowWidthNegative) var(--shadowWidthNegative) 0px var(--color);
+}
+
+.myChar {
+  --color: green;
+}
+
+.enemyChar {
+  --color: red;
+}
+
+.canUse {
+  --color: orange;
 }

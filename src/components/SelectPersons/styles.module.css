@@ -1,3 +1,18 @@
 .root {
   
 }
+
+.characterButton {
+  aspect-ratio: 16/9;
+  height: 100px;
+  padding: 5px;
+  overflow: hidden;
+  border-color: gray;
+}
+
+.characterImg {
+  translate: 0 70%;
+  margin: auto;
+  width: 100px;
+  scale: 2.3;
+}
