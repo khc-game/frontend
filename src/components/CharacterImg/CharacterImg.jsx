@@ -4,9 +4,7 @@ import rockImg from '../../assets/img/characters/rock.png';
 import vampireImg from '../../assets/img/characters/vampire.png';
 import bambrikImg from '../../assets/img/characters/bambrik.png';
 import honliaImg from '../../assets/img/characters/honlia.png';
-
-// styles
-// import classes from './styles.module.css';
+import emptyImg from '../../assets/img/characters/empty.png';
 
 export default function CharacterImg({ characterKey, className = "" }) {
   let src = null;
@@ -38,7 +36,7 @@ export default function CharacterImg({ characterKey, className = "" }) {
     }
 
     default: {
-      return <div className={className}>?</div>
+      src = emptyImg;
     }
   }
 
