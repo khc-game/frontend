@@ -10,7 +10,8 @@ import classes from './styles.module.css';
 export default function HomePage() {
   return (
     <div className={classes.root}>
-      <Link to={ROUTES.GAME}>Game</Link>
+      <Link to={ROUTES.GAME}>Game</Link><br/>
+      <Link to={ROUTES.PREVIEW}>Preview</Link>
     </div>
   )
 }

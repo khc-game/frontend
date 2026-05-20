@@ -42,7 +42,7 @@ export default function Cell({ data, i, j, onCellClick, isRotateMap, whereCanUse
         data?.content &&
         <>
           <p>{data?.content?.hp}</p>
-          <CharacterImg characterName={data.content.key} className={classes.person}/>
+          <CharacterImg characterKey={data.content.key} className={classes.person}/>
         </>
       }
     </div>

@@ -88,7 +88,7 @@ export default function SelectPersons({ onPlay }) {
 function Character({ data, onSelectChar }) {
   return (
     <button onClick={onSelectChar} className={classes.characterButton}>
-      <CharacterImg characterName={data.key} className={classes.characterImg}/>
+      <CharacterImg characterKey={data.key} className={classes.characterImg}/>
     </button>
   );
 }

@@ -8,10 +8,10 @@ import honliaImg from '../../assets/img/characters/honlia.png';
 // styles
 // import classes from './styles.module.css';
 
-export default function CharacterImg({ characterName, className = "" }) {
+export default function CharacterImg({ characterKey, className = "" }) {
   let src = null;
   
-  switch(characterName) {
+  switch(characterKey) {
     case "jellyfish": {
       src = jellyfishImg;
       break;

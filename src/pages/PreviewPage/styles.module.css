@@ -1,0 +1,97 @@
+.root {
+  display: flex;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.character {
+  width: fit-content;
+  display: grid;
+  grid-template-columns: min-content auto;
+  gap: 10px;
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid gray;
+}
+
+.mainInfo {
+  display: flex;
+  position: sticky;
+  top: 10px;
+  height: fit-content;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  width: fit-content;
+}
+
+.characterImg {
+  width: 100px;
+}
+
+.name {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.modules {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* MODULES ================================== */
+.module {
+  gap: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #cecece;
+}
+
+.moduleTitle {
+  font-weight: bold;
+  font-size: 15px;
+  margin-bottom: 5px;
+  text-align: center;
+  padding-bottom: 5px;
+}
+
+.moduleContent {
+  display: flex;
+  height: fit-content;
+  justify-content: space-between;
+  gap: 10px;
+  border-radius: 5px;
+}
+
+.moduleBaseInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.moduleImg {
+  width: 50px;
+}
+
+
+.moduleDatas {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+
+  p {
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 3px;
+    border-radius: 3px;
+    padding: 3px 7px;
+    border: 1px dashed #b3b3b3;
+  }
+}
