@@ -14,9 +14,6 @@ import ModuleImg from '../../components/ModuleImg';
 // api
 import getCharactersAPI from '../../api/getCharactersAPI';
 
-// img
-import emptyModuleImg from '../../assets/img/modules/empty.png';
-
 // styles
 import classes from './styles.module.css';
 
