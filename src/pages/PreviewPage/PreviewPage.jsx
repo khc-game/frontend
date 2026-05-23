@@ -6,8 +6,6 @@ import { LuSwords } from "react-icons/lu";
 import { LuTimer } from "react-icons/lu";
 import { GiHealthNormal } from "react-icons/gi";
 import { BiDonateBlood } from "react-icons/bi";
-import { BsFillLightningChargeFill } from "react-icons/bs";
-
 
 // components
 import CharacterImg from '../../components/CharacterImg';
@@ -42,15 +40,8 @@ export default function PreviewPage() {
   )
 }
 
-
 function Character({ char }) {
   const { key, name, hp, modules } = char;
-
-  const [power, setPower] = useState(hp);
-
-  const addPower = (power) => {
-    setPower(prev => prev + power);
-  };
 
   return (
     <div className={classes.character}>
@@ -58,13 +49,12 @@ function Character({ char }) {
         <p><FaHeart color='#f89'/> {hp}</p>
         <CharacterImg characterKey={key} className={classes.characterImg}/>
         <p className={classes.name} >{name}</p>
-        <p><BsFillLightningChargeFill color='gold'/> {power}</p>
       </div>
 
       <div className={classes.modules}>
         {
           modules.map((module, ind) =>
-            <Module key={ind} module={module} addPower={addPower}/>
+            <Module key={ind} module={module} />
           )
         }
       </div>
@@ -72,26 +62,8 @@ function Character({ char }) {
   );
 }
 
-function Module({ module, addPower }) {
+function Module({ module }) {
   const { title, radius, damage, cooldown, heal, blood } = module;
-
-  useEffect(() => {
-    const values = [];
-    
-    if (radius) values.push(radius);
-    if (damage) values.push(damage);
-    if (heal) values.push(heal);
-    if (blood) values.push(blood);
-
-    let summ = 0;
-    values.forEach(num => summ += num);
-
-    if (cooldown !== null) {
-      summ = Math.floor(summ / cooldown);
-    }
-
-    addPower(summ);
-  }, []);
 
   return (
     <div className={classes.module}>

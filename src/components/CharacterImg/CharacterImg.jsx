@@ -1,17 +1,18 @@
 // images
-import jellyfishImg from '../../assets/img/characters/jellyfish.png';
+import jellishImg from '../../assets/img/characters/jellyfish.png';
 import rockImg from '../../assets/img/characters/rock.png';
 import vampireImg from '../../assets/img/characters/vampire.png';
 import bambrikImg from '../../assets/img/characters/bambrik.png';
 import honliaImg from '../../assets/img/characters/honlia.png';
 import emptyImg from '../../assets/img/characters/empty.png';
+import amoebaImg from '../../assets/img/characters/amoeba.png';
 
 export default function CharacterImg({ characterKey, className = "" }) {
   let src = null;
   
   switch(characterKey) {
-    case "jellyfish": {
-      src = jellyfishImg;
+    case "jellish": {
+      src = jellishImg;
       break;
     }
     
@@ -32,6 +33,11 @@ export default function CharacterImg({ characterKey, className = "" }) {
 
     case "honlia": {
       src = honliaImg;
+      break;
+    }
+
+    case "amoeba": {
+      src = amoebaImg;
       break;
     }
 
