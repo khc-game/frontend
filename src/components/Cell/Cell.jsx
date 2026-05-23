@@ -10,7 +10,6 @@ import classes from './styles.module.css';
 export default function Cell({ data, i, j, onCellClick, isRotateMap, whereCanUse }) {
   const { id: userId } = useSocket();
 
-
   let isCanUseHere = false;
 
   if (whereCanUse) {

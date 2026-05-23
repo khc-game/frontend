@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 
 // components
 import Cell from '../Cell/Cell';
+import ModuleImg from '../ModuleImg';
 
 // hooks
 import useRedux from '../../hooks/useRedux';
@@ -96,13 +97,16 @@ export default function Board() {
         )}
       </div>
       <p>{userId} {turn === userId && "(turn)"}</p>
-      {
-        selectedCharacter?.character?.modules.map((module, ind) =>
-          <button key={ind} onClick={() => onModuleClick(ind)}>
-            {module?.title}
-          </button>
-        )
-      }
+
+      <div className={classes.modules}>
+        {
+          selectedCharacter?.character?.modules.map((module, ind) =>
+            <button key={ind} onClick={() => onModuleClick(ind)}>
+              <ModuleImg moduleTitle={module.title} className={classes.moduleImg}/>
+            </button>
+          )
+        }
+      </div>
     </>
   )
 }

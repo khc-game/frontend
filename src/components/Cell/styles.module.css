@@ -17,9 +17,6 @@
   object-fit: contain;
 }
 
-
-
-.enemyChar,
 .canUse,
 .myChar {
   --shadowWidth: 2px;

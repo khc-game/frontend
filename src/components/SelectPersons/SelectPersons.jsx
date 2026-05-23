@@ -18,6 +18,8 @@ export default function SelectPersons({ onPlay }) {
   const { socketEmit } = useSocket();
   const [selectedCharacters, setSelectedCharacters] = useState([]);
   const [allCharacters, setAllCharacters] = useState([]);
+  const [money, setMoney] = useState(8);
+  
   const api_getCharacters = useApiResolver(getCharactersAPI, {
     default(result) {
       console.log(result);
@@ -40,14 +42,20 @@ export default function SelectPersons({ onPlay }) {
   }, []);
 
   const deselectChar = (ind) => {
-    setAllCharacters(prev => [...prev, selectedCharacters[ind]]);
+    const character = selectedCharacters[ind];
+    setMoney(prev => prev + character.cost);
+    setAllCharacters(prev => [...prev, character]);
     setSelectedCharacters(prev => prev.filter((_c, cInd) => cInd !== ind));
   };
 
   const selectChar = (ind) => {
-    if (selectedCharacters.length === 4) return;
-    setSelectedCharacters(prev => [...prev, allCharacters[ind]]);
-    setAllCharacters(prev => prev.filter((_c, cInd) => cInd !== ind));
+    if (selectedCharacters.length === 8) return;
+    const character = allCharacters[ind];
+    if (money >= character.cost) {
+      setMoney(prev => prev - character.cost);
+      setSelectedCharacters(prev => [...prev, character]);
+      setAllCharacters(prev => prev.filter((_c, cInd) => cInd !== ind));
+    }
   };
 
   return (
@@ -56,6 +64,7 @@ export default function SelectPersons({ onPlay }) {
 
       <div>
         <h3>Selected characters</h3>
+        <p>Money: {money}</p>
         <div className={classes.characters}>
           {selectedCharacters.length === 0 ? 
             <p className={classes.emptyCharacterMsg}>Select characters</p>:
@@ -91,6 +100,7 @@ function Character({ data, onSelectChar }) {
   return (
     <button onClick={onSelectChar} className={classes.characterButton}>
       <CharacterImg characterKey={data.key} className={classes.characterImg}/>
+      <p>Cost: {data.cost}</p>
     </button>
   );
 }

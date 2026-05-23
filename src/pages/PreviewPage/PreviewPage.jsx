@@ -6,6 +6,7 @@ import { LuSwords } from "react-icons/lu";
 import { LuTimer } from "react-icons/lu";
 import { GiHealthNormal } from "react-icons/gi";
 import { BiDonateBlood } from "react-icons/bi";
+import { PiCoins } from "react-icons/pi";
 
 // components
 import CharacterImg from '../../components/CharacterImg';
@@ -41,7 +42,7 @@ export default function PreviewPage() {
 }
 
 function Character({ char }) {
-  const { key, name, hp, modules } = char;
+  const { key, name, hp, modules, cost } = char;
 
   return (
     <div className={classes.character}>
@@ -49,6 +50,7 @@ function Character({ char }) {
         <p><FaHeart color='#f89'/> {hp}</p>
         <CharacterImg characterKey={key} className={classes.characterImg}/>
         <p className={classes.name} >{name}</p>
+        <p><PiCoins color='green'/> {cost}</p>
       </div>
 
       <div className={classes.modules}>

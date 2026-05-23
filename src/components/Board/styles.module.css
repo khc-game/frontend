@@ -11,31 +11,16 @@
   transform: rotate(180deg);
 }
 
-
-.personsMenu {
-  position: absolute;
+.modules {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 10px;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100dvh;
-  padding: 10px;
-  border-radius: 10px;
-  margin: auto;
-  background: white;
+  gap: 5px;
 
   button {
-    padding: 10px;
-    border-radius: 5px;
+    padding: 0;
+    overflow: hidden;
   }
-  
-  .person {
-    width: 300px;
-    outline: none;
-    border: none;
-  }
+}
+
+.moduleImg {
+  width: 50px;
 }
