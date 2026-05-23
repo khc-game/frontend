@@ -29,13 +29,13 @@
 }
 
 .myChar {
-  --color: green;
+  --color: #009100;
 }
 
 .enemyChar {
-  --color: red;
+  --color: #ff0000;
 }
 
 .canUse {
-  --color: orange;
+  --color: #ffa500;
 }

@@ -41,7 +41,7 @@ const socketSlice = createSlice({
       if (state.socket === null) return;
 
       state.socket?.removeAllListeners();
-      state.socket?.close();
+      state.socket.disconnect();
       state.socket = null;
     },
 

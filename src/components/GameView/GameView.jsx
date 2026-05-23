@@ -11,7 +11,7 @@ import useSocket from '../../hooks/useSocket';
 import classes from './styles.module.css';
 
 export default function GameView({ setGameState }) {
-  const { socketEmit, socketOn, socketOff } = useSocket();
+  const { socketEmit, socketOn, socketOff, socketDisconnect } = useSocket();
 
   useEffect(() => {
     socketOn("end:resign", () => {
@@ -25,6 +25,7 @@ export default function GameView({ setGameState }) {
     return () => {
       socketOff("end:resign");
       socketOff("end:leave");
+      socketDisconnect();
     };
   }, []);
 
