@@ -22,9 +22,14 @@ export default function GameView({ setGameState }) {
       console.log("Opponent leaved");
     });
 
+    socketOn("end:time", (data) => {
+      console.log("Time in up", data);
+    });
+
     return () => {
       socketOff("end:resign");
       socketOff("end:leave");
+      socketOff("end:time");
       socketDisconnect();
     };
   }, []);
