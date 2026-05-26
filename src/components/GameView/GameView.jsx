@@ -26,10 +26,15 @@ export default function GameView({ setGameState }) {
       console.log("Time in up", data);
     });
 
+    socketOn("end:killed", (data) => {
+      console.log("Game over. Winner - ", data);
+    });
+
     return () => {
       socketOff("end:resign");
       socketOff("end:leave");
       socketOff("end:time");
+      socketOff("end:killed");
       socketDisconnect();
     };
   }, []);
