@@ -25,23 +25,23 @@ export default function Cell({ data, i, j, onCellClick, isRotateMap, whereCanUse
     onCellClick(i, j, isCanUseHere);
   }
 
-  const isPlayerCharacter = userId === data?.content?.playerId;
+  const isPlayerCharacter = userId === data?.character?.playerId;
 
   return (
     <div 
       className={`
         ${classes.root} 
         ${isRotateMap && classes.rotate}
-        ${data?.content && (isPlayerCharacter ? classes.myChar : classes.enemyChar)}
+        ${data?.character && (isPlayerCharacter ? classes.myChar : classes.enemyChar)}
         ${isCanUseHere && classes.canUse }
       `} 
       onClick={onClick} 
     >
       {
-        data?.content &&
+        data?.character &&
         <>
-          <p>{data?.content?.hp}</p>
-          <CharacterImg characterKey={data.content.key} className={classes.person}/>
+          <p>{data?.character?.hp}</p>
+          <CharacterImg characterKey={data.character.key} className={classes.person}/>
         </>
       }
     </div>

@@ -61,7 +61,7 @@ export default function Board() {
     setWhereCanUse(null);
 
     if (turn !== userId) return;
-    const character = map[i][j].content;
+    const character = map[i][j].character;
 
     if (character?.playerId !== userId) return setSelectedCharacter(null);
   
