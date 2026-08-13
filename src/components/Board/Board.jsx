@@ -1,19 +1,19 @@
 // libs
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 // components
-import Cell from '../Cell/Cell';
-import ModuleImg from '../ModuleImg';
+import Cell from "../Cell/Cell";
+import ModuleImg from "../ModuleImg";
 
 // hooks
-import useRedux from '../../hooks/useRedux';
-import useSocket from '../../hooks/useSocket';
+import useRedux from "../../hooks/useRedux";
+import useSocket from "../../hooks/useSocket";
 
 // actions
-import { applyMapChanges, changeTurn } from '../../store/slices/game.slice.js'
+import { applyMapChanges, changeTurn } from "../../store/slices/game.slice.js";
 
 // styles
-import classes from './styles.module.css';
+import classes from "./styles.module.css";
 
 export default function Board() {
   const [selectedCharacter, setSelectedCharacter] = useState(null);
@@ -28,7 +28,7 @@ export default function Board() {
   useEffect(() => {
     socketOn("message", (msg) => console.log(msg));
     socketOn("module:canUseAt", (data) => setWhereCanUse(data));
-    socketOn("module:mapUpdate", (data) => {
+    socketOn("module:changes", (data) => {
       const [updates, newTurn] = data;
       dispatch(applyMapChanges(updates));
       dispatch(changeTurn(newTurn));
@@ -40,7 +40,7 @@ export default function Board() {
     return () => {
       socketOff("message");
       socketOff("module:canUseAt");
-      socketOff("module:mapUpdate");
+      socketOff("module:changes");
     };
   }, []);
 
@@ -57,33 +57,35 @@ export default function Board() {
 
       return;
     }
-    
+
     setWhereCanUse(null);
 
     if (turn !== userId) return;
     const character = map[i][j].character;
 
     if (character?.playerId !== userId) return setSelectedCharacter(null);
-  
+
     setSelectedCharacter({ character, i, j });
   };
 
   const onModuleClick = (moduleInd) => {
     setWhereCanUse(null);
     setSelectedModuleInd(moduleInd);
-    socketEmit("module:select", { 
-      i: selectedCharacter.i, 
-      j: selectedCharacter.j, 
-      ind: moduleInd 
+    socketEmit("module:select", {
+      i: selectedCharacter.i,
+      j: selectedCharacter.j,
+      ind: moduleInd,
     });
   };
 
   return (
     <>
-      <p>{opponentId} {turn === opponentId && "(turn)"}</p>
+      <p>
+        {opponentId} {turn === opponentId && "(turn)"}
+      </p>
       <div className={`${classes.root} ${isRotateMap && classes.rotate}`}>
         {map.map((line, i) =>
-          line.map((cellData, j) =>
+          line.map((cellData, j) => (
             <Cell
               key={`${i} ${j}`}
               data={cellData}
@@ -93,20 +95,23 @@ export default function Board() {
               isRotateMap={isRotateMap}
               whereCanUse={whereCanUse}
             />
-          )
+          )),
         )}
       </div>
-      <p>{userId} {turn === userId && "(turn)"}</p>
+      <p>
+        {userId} {turn === userId && "(turn)"}
+      </p>
 
       <div className={classes.modules}>
-        {
-          selectedCharacter?.character?.modules.map((module, ind) =>
-            <button key={ind} onClick={() => onModuleClick(ind)}>
-              <ModuleImg moduleTitle={module.title} className={classes.moduleImg}/>
-            </button>
-          )
-        }
+        {selectedCharacter?.character?.modules.map((module, ind) => (
+          <button key={ind} onClick={() => onModuleClick(ind)}>
+            <ModuleImg
+              moduleTitle={module.title}
+              className={classes.moduleImg}
+            />
+          </button>
+        ))}
       </div>
     </>
-  )
+  );
 }
