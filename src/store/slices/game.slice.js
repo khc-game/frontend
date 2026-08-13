@@ -20,7 +20,6 @@ const gameSlice = createSlice({
       for (let i = 0; i < payload.length; ++i) {
         const { changeType, data } = payload[i];
 
-        // TODO: add logic
         switch (changeType) {
           case changeTypes.BUFF: {
             const [i, j, playerField, buffSize] = data;
