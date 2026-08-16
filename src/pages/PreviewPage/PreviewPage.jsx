@@ -7,12 +7,9 @@ import { LuTimer } from "react-icons/lu";
 import { GiHealthNormal } from "react-icons/gi";
 import { BiDonateBlood } from "react-icons/bi";
 import { PiCoins } from "react-icons/pi";
-import { MdOutlineSell } from "react-icons/md";
 import { FiShoppingBag } from "react-icons/fi";
 import { TbCoins } from "react-icons/tb";
 import { LuHandCoins } from "react-icons/lu";
-import { TbCashMoveBack } from "react-icons/tb";
-import { TbCashMove } from "react-icons/tb";
 
 // components
 import CharacterImg from "../../components/CharacterImg";
@@ -48,7 +45,7 @@ export default function PreviewPage() {
 }
 
 function Character({ char, characters }) {
-  const { key, name, hp, modules, cost, shop } = char;
+  const { key, name, hp, modules, cost, shop, cantSelect } = char;
 
   return (
     <div className={classes.character}>
@@ -74,6 +71,15 @@ function Character({ char, characters }) {
             </p>
             <p>
               <LuHandCoins color="purple" /> +{shop[2]} after move
+            </p>
+          </div>
+        )}
+
+        {cantSelect && (
+          <div className={classes.cantSelect}>
+            <p className={classes.cantSelectHeaderText}>
+              Cannot be <br />
+              selected for play
             </p>
           </div>
         )}
