@@ -1,6 +1,6 @@
 .root {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 1px;
   width: fit-content;
   border: 2px solid gray;
