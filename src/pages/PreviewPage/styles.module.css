@@ -8,7 +8,7 @@
 .character {
   width: fit-content;
   display: grid;
-  grid-template-columns: min-content auto;
+  grid-template-columns: 1fr auto;
   gap: 10px;
   border-radius: 5px;
   padding: 10px;
@@ -23,7 +23,9 @@
   flex-direction: column;
   gap: 5px;
   align-items: center;
-  width: fit-content;
+  width: 100%;
+  padding-right: 10px;
+  border-right: 1px dashed #b3b3b3;
 }
 
 .characterImg {
@@ -36,11 +38,27 @@
   margin-top: 5px;
 }
 
+.shop {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #b3b3b3;
+}
+
+.shopHeaderText {
+  font-weight: bold;
+  font-size: 15px;
+  text-align: center;
+  border-bottom: 1px dashed #b3b3b3;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+
 .modules {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: column;
   gap: 5px;
+  height: fit-content;
 }
 
 /* MODULES ================================== */
@@ -76,7 +94,6 @@
 .moduleImg {
   width: 50px;
 }
-
 
 .moduleDatas {
   display: flex;
