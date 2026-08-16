@@ -29,8 +29,6 @@ const gameSlice = createSlice({
 
           case changeTypes.DAMAGE: {
             const [toI, toJ, damage] = data;
-            console.log(data);
-
             state.map[toI][toJ].character.hp -= damage;
             break;
           }
