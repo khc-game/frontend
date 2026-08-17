@@ -57,9 +57,11 @@ function Character({ char, characters }) {
           <FaHeart color="#f89" /> {hp}
         </p>
 
-        <p>
-          <PiCoins color="green" /> {cost}
-        </p>
+        {cost && (
+          <p>
+            <PiCoins color="green" /> {cost}
+          </p>
+        )}
 
         {shop && (
           <div className={classes.shop}>
