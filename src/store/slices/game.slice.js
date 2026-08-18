@@ -21,12 +21,6 @@ const gameSlice = createSlice({
         const { changeType, data } = payload[i];
 
         switch (changeType) {
-          case changeTypes.BUFF: {
-            const [i, j, playerField, buffSize] = data;
-            state.map[i][j].character[playerField] += buffSize;
-            break;
-          }
-
           case changeTypes.DAMAGE: {
             const [toI, toJ, damage] = data;
             state.map[toI][toJ].character.hp -= damage;
