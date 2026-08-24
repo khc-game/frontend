@@ -53,6 +53,12 @@ const gameSlice = createSlice({
             break;
           }
 
+          case changeTypes.TRANSFORM_CHARACTER: {
+            const [i, j, newCharacter] = data;
+            state.map[i][j].character = newCharacter;
+            break;
+          }
+
           default: {
             if (changeTypes[changeType]) {
               console.warn(`[NOT IMPLEMENTED]: ${changeType}`);
