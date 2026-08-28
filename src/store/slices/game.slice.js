@@ -30,6 +30,13 @@ const gameSlice = createSlice({
           case changeTypes.HEAL: {
             const [toI, toJ, heal] = data;
             state.map[toI][toJ].character.hp += heal;
+            if (
+              state.map[toI][toJ].character.hp >
+              state.map[toI][toJ].character.maxHP
+            ) {
+              state.map[toI][toJ].character.hp =
+                state.map[toI][toJ].character.maxHP;
+            }
             break;
           }
 

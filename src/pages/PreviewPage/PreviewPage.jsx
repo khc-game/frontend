@@ -114,7 +114,7 @@ function Module({ module, characters }) {
           {isShopItem ? (
             <CharacterImg characterKey={title} className={classes.moduleImg} />
           ) : (
-            <ModuleImg moduleTitle={title} className={classes.moduleImg} />
+            <ModuleImg module={module} className={classes.moduleImg} />
           )}
         </div>
 

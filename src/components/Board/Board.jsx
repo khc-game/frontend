@@ -105,10 +105,7 @@ export default function Board() {
       <div className={classes.modules}>
         {selectedCharacter?.character?.modules.map((module, ind) => (
           <button key={ind} onClick={() => onModuleClick(ind)}>
-            <ModuleImg
-              moduleTitle={module.title}
-              className={classes.moduleImg}
-            />
+            <ModuleImg module={module} className={classes.moduleImg} />
           </button>
         ))}
       </div>
