@@ -14,7 +14,7 @@ export default function LobbyView({ setGameState }) {
 
   return (
     <div className={classes.root}>
-      <SelectPersons onPlay={onPlay}/>
+      <SelectPersons onPlay={onPlay} />
     </div>
   );
 }

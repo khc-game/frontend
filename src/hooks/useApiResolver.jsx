@@ -8,7 +8,7 @@ export default function useApiResolver(fetchAPI, handlers) {
     } else {
       handlers?.default(result);
     }
-  }
+  };
 
   return fetch;
 }

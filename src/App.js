@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 // pages
 import HomePage from "./pages/HomePage";
 import GamePage from "./pages/GamePage";
-import PreviewPage from './pages/PreviewPage';
+import PreviewPage from "./pages/PreviewPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 // constants

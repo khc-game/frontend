@@ -1,13 +1,20 @@
 // components
-import CharacterImg from '../CharacterImg';
+import CharacterImg from "../CharacterImg";
 
 // hooks
-import useSocket from '../../hooks/useSocket';
+import useSocket from "../../hooks/useSocket";
 
 // styles
-import classes from './styles.module.css';
+import classes from "./styles.module.css";
 
-export default function Cell({ data, i, j, onCellClick, isRotateMap, whereCanUse }) {
+export default function Cell({
+  data,
+  i,
+  j,
+  onCellClick,
+  isRotateMap,
+  whereCanUse,
+}) {
   const { id: userId } = useSocket();
 
   let isCanUseHere = false;
@@ -23,27 +30,29 @@ export default function Cell({ data, i, j, onCellClick, isRotateMap, whereCanUse
 
   const onClick = () => {
     onCellClick(i, j, isCanUseHere);
-  }
+  };
 
   const isPlayerCharacter = userId === data?.character?.playerId;
 
   return (
-    <div 
+    <div
       className={`
         ${classes.root} 
         ${isRotateMap && classes.rotate}
         ${data?.character && (isPlayerCharacter ? classes.myChar : classes.enemyChar)}
-        ${isCanUseHere && classes.canUse }
-      `} 
-      onClick={onClick} 
+        ${isCanUseHere && classes.canUse}
+      `}
+      onClick={onClick}
     >
-      {
-        data?.character &&
+      {data?.character && (
         <>
           <p>{data?.character?.hp}</p>
-          <CharacterImg characterKey={data.character.key} className={classes.person}/>
+          <CharacterImg
+            characterKey={data.character.key}
+            className={classes.person}
+          />
         </>
-      }
+      )}
     </div>
-  )
+  );
 }

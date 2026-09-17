@@ -1,12 +1,12 @@
 // constants
-import SERVER from '../constants/server';
+import SERVER from "../constants/server";
 
 export default async function getCharactersAPI() {
   const r = await fetch(`${SERVER}/api/characters`, {
     method: "GET",
     headers: {
       "content-type": "application/json",
-    }
+    },
   });
 
   try {
@@ -18,7 +18,7 @@ export default async function getCharactersAPI() {
     };
   } catch (error) {
     return {
-      status: r.status
+      status: r.status,
     };
   }
 }
