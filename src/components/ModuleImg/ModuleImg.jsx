@@ -9,6 +9,7 @@ import vampirismImg from "../../assets/img/modules/vampirism.png";
 import teleportImg from "../../assets/img/modules/teleport.png";
 import potionImg from "../../assets/img/modules/potion.png";
 import divideImg from "../../assets/img/modules/divide.png";
+import selfExplosionImg from "../../assets/img/modules/attack.png";
 
 export default function ModuleImg({ module, className = "" }) {
   const { title, isShopItem, type } = module;
@@ -22,6 +23,11 @@ export default function ModuleImg({ module, className = "" }) {
   let src = null;
 
   switch (title) {
+    case "Explosion": {
+      src = selfExplosionImg;
+      break;
+    }
+
     case "Move": {
       src = moveImg;
       break;
@@ -53,7 +59,7 @@ export default function ModuleImg({ module, className = "" }) {
     }
 
     default: {
-      console.log(title);
+      console.log("Undefined module img name:", title);
       src = emptyImg;
     }
   }

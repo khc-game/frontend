@@ -12,11 +12,23 @@ import chessRockImg from "../../assets/img/characters/chess_rook.png";
 import chessKnightImg from "../../assets/img/characters/chess_knight.png";
 import chessBishopImg from "../../assets/img/characters/chess_bishop.png";
 import chessPawnImg from "../../assets/img/characters/chess_pawn.png";
+import jarImg from "../../assets/img/characters/jar.png";
+import jarShardImg from "../../assets/img/characters/jar_shard.png";
 
 export default function CharacterImg({ characterKey, className = "" }) {
   let src = null;
 
   switch (characterKey) {
+    case "jar": {
+      src = jarImg;
+      break;
+    }
+
+    case "jar_shard": {
+      src = jarShardImg;
+      break;
+    }
+
     case "chess_king": {
       src = chessKingImg;
       break;

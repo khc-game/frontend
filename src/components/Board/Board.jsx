@@ -78,12 +78,18 @@ export default function Board() {
     });
   };
 
+  const columns = map.length;
+  const style = { gridTemplateColumns: `repeat(${columns}, 1fr)` };
+
   return (
     <>
       <p>
         {opponentId} {turn === opponentId && "(turn)"}
       </p>
-      <div className={`${classes.root} ${isRotateMap && classes.rotate}`}>
+      <div
+        className={`${classes.root} ${isRotateMap && classes.rotate}`}
+        style={style}
+      >
         {map.map((line, i) =>
           line.map((cellData, j) => (
             <Cell
