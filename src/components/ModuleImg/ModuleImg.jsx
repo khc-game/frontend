@@ -9,7 +9,7 @@ import vampirismImg from "../../assets/img/modules/vampirism.png";
 import teleportImg from "../../assets/img/modules/teleport.png";
 import potionImg from "../../assets/img/modules/potion.png";
 import divideImg from "../../assets/img/modules/divide.png";
-import selfExplosionImg from "../../assets/img/modules/attack.png";
+import selfExplosionImg from "../../assets/img/modules/glass_explosion.png";
 
 export default function ModuleImg({ module, className = "" }) {
   const { title, isShopItem, type } = module;
