@@ -4,11 +4,13 @@ import { configureStore } from "@reduxjs/toolkit";
 // slices
 import gameSlice from "./slices/game.slice.js";
 import socketSlice from "./slices/socket.slice.js";
+import tokenSlice from "./slices/token.slice.js";
 
 const store = configureStore({
   reducer: {
     gameSlice,
     socketSlice,
+    tokenSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

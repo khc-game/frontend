@@ -1,5 +1,5 @@
 // libs
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 // pages
 import HomePage from "./pages/HomePage";
@@ -17,9 +17,12 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path={ROUTES.HOME} element={<HomePage />} />
-        <Route path={ROUTES.GAME} element={<GamePage />} />
-        <Route path={ROUTES.PREVIEW} element={<PreviewPage />} />
+        {/* <Route index element={<Navigate to={ROUTES.PREVIEW} />} /> */}
+        <Route path={ROUTES.HOME} element={<HomePage />}>
+          <Route path={ROUTES.GAME} element={<GamePage />} />
+          <Route path={ROUTES.PREVIEW} element={<PreviewPage />} />
+        </Route>
+
         <Route path={ROUTES.NOT_FOUND} element={<NotFoundPage />} />
       </Routes>
     </div>
