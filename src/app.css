@@ -6,7 +6,6 @@
 }
 
 body {
-  padding: 10px;
 }
 
 input,
@@ -24,7 +23,7 @@ button {
   font-weight: bold;
   border: 1px solid black;
   border-radius: 5px;
-  transition: .3s;
+  transition: 0.3s;
   box-shadow: 0px 0px 0 black;
 
   &:hover {

@@ -1,0 +1,29 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100dvh;
+}
+
+.menu {
+  /* border: 1px solid #dddddd; */
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.headText {
+  margin-bottom: 10px;
+}
+
+.link {
+  text-decoration: none;
+  text-align: center;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background: #eeeeee;
+  color: #000000;
+}
