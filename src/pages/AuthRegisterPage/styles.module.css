@@ -1,1 +1,26 @@
-.root {}
+.root {
+  padding: 10px;
+  margin: auto;
+  margin-top: 20px;
+  width: fit-content;
+}
+
+.h3 {
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.input {
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.tip {
+  margin-top: 10px;
+}
