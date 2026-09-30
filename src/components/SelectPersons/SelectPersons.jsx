@@ -20,7 +20,7 @@ export default function SelectPersons({ onPlay }) {
   const [allCharacters, setAllCharacters] = useState([]);
   const [money, setMoney] = useState(8);
 
-  const api_getCharacters = useApiResolver(getCharactersAPI, {
+  const api_getCharacters = useApiResolver(getCharactersAPI, [], {
     default(result) {
       console.log(result);
     },

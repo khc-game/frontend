@@ -1,6 +1,6 @@
-export default function useApiResolver(fetchAPI, handlers) {
+export default function useApiResolver(fetchAPI, fetchArgs, handlers) {
   const fetch = async () => {
-    const result = await fetchAPI();
+    const result = await fetchAPI(...fetchArgs);
     const status = result.status;
 
     if (handlers[status]) {
