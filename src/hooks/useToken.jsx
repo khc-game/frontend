@@ -9,6 +9,9 @@ import {
   setRefreshToken as setRefreshTokenAction,
 } from "../store/slices/token.slice.js";
 
+// api
+import TokenAPI from "../api/tokenAPI.js";
+
 export default function useToken() {
   const [tokens, dispatch] = useRedux("tokenSlice");
   const { accessToken, refreshToken } = tokens;
@@ -29,6 +32,18 @@ export default function useToken() {
     dispatch(setRefreshTokenAction(token));
   };
 
+  const doRefreshToken = async () => {
+    const result = await TokenAPI.refreshToken(refreshToken);
+    const isOK = result.status === 200;
+
+    if (isOK) {
+      const { accessToken, refreshToken } = result.tokens;
+      setTokens(accessToken, refreshToken);
+    }
+
+    return isOK;
+  };
+
   return {
     accessToken,
     refreshToken,
@@ -36,5 +51,6 @@ export default function useToken() {
     clearTokens,
     setAccessToken,
     setRefreshToken,
+    doRefreshToken,
   };
 }

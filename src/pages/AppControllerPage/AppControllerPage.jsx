@@ -9,8 +9,8 @@ import useToken from "../../hooks/useToken";
 import ROUTES from "../../constants/routes";
 
 export default function AppControllerPage() {
-  const navigate = useNavigate();
   const { accessToken } = useToken();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (accessToken) {
