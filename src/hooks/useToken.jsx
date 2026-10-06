@@ -36,8 +36,6 @@ export default function useToken() {
     const result = await TokenAPI.refreshToken(refreshToken);
     const isOK = result.status === 200;
 
-    console.log("Status:", result.status);
-
     if (isOK) {
       const { accessToken, refreshToken: resultRefreshToken } = result.tokens;
       setTokens(accessToken, resultRefreshToken);
