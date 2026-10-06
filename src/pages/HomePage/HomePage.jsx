@@ -12,12 +12,13 @@ import ROUTES from "../../constants/routes";
 import classes from "./styles.module.css";
 
 export default function HomePage() {
-  const { doRefreshToken, clearTokens } = useToken();
+  const { refreshToken, doRefreshToken, clearTokens } = useToken();
   const navigate = useNavigate();
 
-  const updateTokens = async () => {
+  const rehydrateToken = async () => {
     const isOK = await doRefreshToken();
-    if (isOK) {
+
+    if (isOK && refreshToken) {
       navigate(ROUTES.GAME_MENU);
     } else {
       clearTokens();
@@ -26,23 +27,18 @@ export default function HomePage() {
   };
 
   useEffect(() => {
-    updateTokens();
+    rehydrateToken();
+  }, []);
 
-    const interval = setInterval(
-      async () => {
-        const isOK = await doRefreshToken();
-        if (!isOK) {
-          clearTokens();
-          navigate(ROUTES.AUTH);
-        }
-      },
-      10 * 60 * 1000,
-    );
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      rehydrateToken();
+    }, 10 * 60_000);
 
     return () => {
-      clearInterval(interval);
+      clearTimeout(timer);
     };
-  }, []);
+  }, [refreshToken]);
 
   return (
     <div className={classes.root}>

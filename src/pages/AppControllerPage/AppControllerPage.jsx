@@ -9,14 +9,19 @@ import useToken from "../../hooks/useToken";
 import ROUTES from "../../constants/routes";
 
 export default function AppControllerPage() {
-  const { accessToken } = useToken();
+  const { accessToken, clearTokens } = useToken();
   const navigate = useNavigate();
 
-  useEffect(() => {
+  const rehydrateToken = async () => {
     if (accessToken) {
       navigate(ROUTES.GAME_MENU);
     } else {
+      clearTokens();
       navigate(ROUTES.AUTH);
     }
+  };
+
+  useEffect(() => {
+    rehydrateToken();
   }, []);
 }
