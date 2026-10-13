@@ -14,11 +14,16 @@ import chessBishopImg from "../../assets/img/characters/chess_bishop.png";
 import chessPawnImg from "../../assets/img/characters/chess_pawn.png";
 import jarImg from "../../assets/img/characters/jar.png";
 import jarShardImg from "../../assets/img/characters/jar_shard.png";
+import dancleImg from "../../assets/img/characters/candle.png";
 
 export default function CharacterImg({ characterKey, className = "" }) {
   let src = null;
 
   switch (characterKey) {
+    case "dancle": {
+      src = dancleImg;
+      break;
+    }
     case "jar": {
       src = jarImg;
       break;
