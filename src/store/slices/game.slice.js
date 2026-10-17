@@ -66,6 +66,12 @@ const gameSlice = createSlice({
             break;
           }
 
+          case changeTypes.MODULES_UPDATE: {
+            const { modules, i, j } = data;
+            state.map[i][j].character.modules = modules;
+            break;
+          }
+
           default: {
             if (changeTypes[changeType]) {
               console.warn(`[NOT IMPLEMENTED]: ${changeType}`);
