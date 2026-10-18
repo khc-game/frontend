@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 // hooks
 import useSocket from "../../hooks/useSocket";
+import useToken from "../../hooks/useToken";
 
 // styles
 import classes from "./styles.module.css";
@@ -13,6 +14,7 @@ import GAME_STATES from "../../constants/gameStates";
 
 export default function ConnectingView({ setGameState }) {
   const { isSocketConnected, socketConnect } = useSocket();
+  const { accessToken } = useToken();
 
   const [connectStatus, setConnectStatus] = useState(CONNECTION_STATES.PENDING);
 
@@ -30,6 +32,7 @@ export default function ConnectingView({ setGameState }) {
     }
 
     socketConnect(
+      accessToken,
       () => {
         changeStateToLobby();
       },

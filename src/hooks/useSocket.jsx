@@ -17,8 +17,8 @@ export default function useSocket() {
 
   const isSocketConnected = socket?.connected ?? false;
 
-  const socketConnect = (onConnect, onError) => {
-    dispatch(connect({ onConnect, onError }));
+  const socketConnect = (accessToken, onConnect, onError) => {
+    dispatch(connect({ accessToken, onConnect, onError }));
   };
 
   const socketDisconnect = () => {

@@ -11,7 +11,7 @@ const socketSlice = createSlice({
 
   reducers: {
     connect(state, { payload }) {
-      const { onConnect = () => {}, onError = () => {} } = payload;
+      const { accessToken, onConnect = () => {}, onError = () => {} } = payload;
 
       if (state.socket !== null) {
         console.warn("Socket is already connected");
@@ -20,6 +20,9 @@ const socketSlice = createSlice({
 
       state.socket = io("http://localhost:5000", {
         // reconnection: false,
+        auth: {
+          token: accessToken,
+        },
       });
 
       state.socket.on("connect_error", (error) => {
