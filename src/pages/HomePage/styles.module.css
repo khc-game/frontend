@@ -1,2 +1,9 @@
 .root {
+  --headerH: 50px;
+  --mainH: calc(100dvh - var(--headerH));
+  height: 100dvh;
+}
+
+.main {
+  height: var(--mainH);
 }
