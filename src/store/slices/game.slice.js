@@ -67,7 +67,7 @@ const gameSlice = createSlice({
           }
 
           case changeTypes.MODULES_UPDATE: {
-            const { modules, i, j } = data;
+            const [modules, i, j] = data;
             state.map[i][j].character.modules = modules;
             break;
           }
